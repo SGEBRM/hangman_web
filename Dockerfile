@@ -1,13 +1,8 @@
 FROM python:3.8-slim-buster
-
-# Copy the requirements file
-COPY requirements.txt /app/requirements.txt
-
-# Set working directory
+LABEL Maintainer="keeyong@gmail.com"
 WORKDIR /app
-
-# Install dependencies
+COPY app.py ./
+COPY requirements.txt ./
 RUN pip3 install -r requirements.txt
-
-# Default command
-CMD ["python3"]
+EXPOSE 4000
+CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=4000"]
